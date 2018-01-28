@@ -17,7 +17,11 @@ class Human extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { animation: this.animations[0]};
+    this.state = {
+      animation: props['animation'],
+      position: props['position'],
+      rotation: props['rotation'],
+    };
   }
 
   render() {
@@ -25,9 +29,54 @@ class Human extends React.Component {
       <Entity 
         gltf-model='#human'
         animation-mixer={{
-          clip: this.animations[0]
+          clip: this.state.animation
         }}
+        position={this.state.position}
+        rotation={this.state.rotation}
       />
+    );
+  }
+}
+
+class Sphere extends React.Component {
+  constructor(props) {
+    super(props);
+    this.correct_color = props['color'] || 'green';
+    this.mistake_color = props['mistake_color'] || 'red';
+    this.state = {
+      color: this.mistake_color,
+    };
+  }
+
+  lookedAt = () => {
+    this.setState({
+      color: this.correct_color,
+    })
+  }
+
+  lookedAway = () => {
+    this.setState({
+      color: this.mistake_color
+    })
+  }
+
+  render() {
+    return (
+      <Entity
+        geometry={{primitive: 'sphere', radius: this.props['radius']}}
+        position={this.props['position']}
+        pivot={this.props['pivot']}
+        material={{color: this.state.color}}>
+        {/* Angle specifies "if you are looking at it" */}
+        <Entity
+          look-dist={{radius: 20}}
+          events={{
+            lookAt: this.lookedAt,
+            lookAway: this.lookedAway,
+          }}
+        />
+        {this.props.children}
+      </Entity>
     );
   }
 }
@@ -47,30 +96,30 @@ class VRScene extends React.Component {
             To change # of repetitions, change numeric value of "repeat" or set "indefinite" 
         */}
 
-        <a-sphere radius="0.5"> {/* src='texture filepath  <- texture */}
+        <Sphere radius="0.5"> {/* src='texture filepath  <- texture */}
           <a-animation attribute="position"
             from="-3 2 -5"
             to="3 2 -5"
             dur="10000"
             direction="alternate"
             repeat="5"></a-animation> 
-        </a-sphere>
+        </Sphere>
 
         {/* Animate up and down Sphere
             To Change Speed, chenge the value in "dur" (miliseconds)
             To change # of repetitions, change numeric value of "repeat" or set "indefinite" 
         */}
 
-        <a-sphere radius="0.25"> {/* src='texture filepath  <- texture */}
+        <Sphere radius="0.25"> {/* src='texture filepath  <- texture */}
           <a-animation attribute="position"
             from="2.5 0.25 0"
             to="5 5 0"
             dur="10000"
             direction="alternate"
             repeat="5"></a-animation>
-        </a-sphere>
+        </Sphere>
 
-        <a-sphere radius="0.5" position="-7 -4 0" pivot="0 4 0">
+        <Sphere radius="0.5" position="-7 -4 0" pivot="0 4 0">
           <a-animation attribute="rotation"
             dur="5000"
             fill="forwards"
@@ -78,9 +127,7 @@ class VRScene extends React.Component {
             to="270 0 0"
             direction="alternate"
             repeat="indefinite"></a-animation>
-        </a-sphere>
-
-        {/* Angle specifies "if you are looking at it" */}
+        </Sphere>
         
         <Entity look-dist={{radius: 15, target: '#text'}} events={{
           'lookAt': () => console.log('You looked at!'),
@@ -90,7 +137,7 @@ class VRScene extends React.Component {
         <Entity raycaster='objects: .clickable' cursor />
 
         <Entity id="text" text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
-        <Human />
+        <Human animation='sidetoside' position='0 1 -5' rotation="0 180 0"/>
         
         <Entity primitive='a-plane' src='#ground_texture' rotation='-90 0 0' height='100' width='100'/>
         <Entity primitive='a-light' type='ambient' color='#445451'/>

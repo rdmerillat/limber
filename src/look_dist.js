@@ -6,11 +6,16 @@ AFRAME.registerComponent('look-dist', {
     radius: { type: 'number' }
   },
 
+  init: function () {
+    this.lastCond = false
+  },
+
   tick: function () {
     var cameraEl = this.el.sceneEl.camera.el;
     var cam = cameraEl.getObject3D('camera');
     var view = cam.matrixWorldInverse;
-    var pos = this.data.target.object3D.position;
+    var tar = this.data.target || this.el.parentEl;
+    var pos = tar.object3D.position;
     pos = new Vector4(pos.x, pos.y, pos.z, 1);
 
     var p = pos.applyMatrix4(view);
@@ -21,7 +26,7 @@ AFRAME.registerComponent('look-dist', {
     var rad = this.data.radius / 180 * Math.PI;
     rad = rad * rad;
     var cond = r < rad;
-    if (this.lastCond != undefined && cond != this.lastCond) {
+    if (cond != this.lastCond) {
       if (cond) {
         this.el.emit('lookAt', {}, false);
       } else {
