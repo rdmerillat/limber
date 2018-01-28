@@ -13,6 +13,11 @@ class Game {
     // Start First Module
     // Display Message of what to do
 
+    // Increment points
+    addPoints() {
+        this.points += 1;
+    }
+
     // When 1 module completes, 
     // if points > x
     //    continue to next module
