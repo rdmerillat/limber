@@ -80,7 +80,10 @@ class VRScene extends React.Component {
             repeat="indefinite"></a-animation>
         </a-sphere>
         
-        <Entity look-dist={{radius: 0.1, target: '#text'}}/>
+        <Entity look-dist={{radius: 15, target: '#text'}} events={{
+          'lookAt': () => console.log('You looked at!'),
+          'lookAway': () => console.log('You looked away!')
+        }}/>
 
         <Entity raycaster='objects: .clickable' cursor />
 
