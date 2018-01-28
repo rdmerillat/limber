@@ -50,7 +50,7 @@ class VRScene extends React.Component {
             dur="10000"
             direction="alternate"
             repeat="indefinite"></a-animation> {/* To change # of repetitions, change numeric value of "repeat" or set "indefinite" */}
-        </a-entity>
+        </a-sphere>
         
         <Entity look-dist={{radius: 0.1, target: '#hello'}}/>
 
