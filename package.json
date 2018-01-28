@@ -7,16 +7,17 @@
     "start": "parcel src/index.html --open"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "aframe": "^0.7.1",
     "aframe-react": "^4.3.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "three": "^0.89.0"
   },
   "devDependencies": {
-    "babel-preset-stage-0": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-plugin-module-resolver": "^3.0.0",
     "parcel-bundler": "^1.5.1"
   }
 }
