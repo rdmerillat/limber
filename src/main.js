@@ -42,21 +42,49 @@ class VRScene extends React.Component {
           <a-asset-item id='human' src={head_model}/>
         </a-assets>
 
-        {/* Animate Cube */}
-        <a-sphere id="ball" radius="0.5">
+        {/* Animate Side to side Sphere
+            To Change Speed, chenge the value in "dur" (miliseconds)
+            To change # of repetitions, change numeric value of "repeat" or set "indefinite" 
+        */}
+
+        <a-sphere radius="0.5"> {/* src='texture filepath  <- texture */}
           <a-animation attribute="position"
             from="-3 2 -5"
             to="3 2 -5"
             dur="10000"
             direction="alternate"
-            repeat="indefinite"></a-animation> {/* To change # of repetitions, change numeric value of "repeat" or set "indefinite" */}
+            repeat="5"></a-animation> 
+        </a-sphere>
+
+        {/* Animate up and down Sphere
+            To Change Speed, chenge the value in "dur" (miliseconds)
+            To change # of repetitions, change numeric value of "repeat" or set "indefinite" 
+        */}
+
+        <a-sphere radius="0.25"> {/* src='texture filepath  <- texture */}
+          <a-animation attribute="position"
+            from="2.5 0.25 0"
+            to="5 5 0"
+            dur="10000"
+            direction="alternate"
+            repeat="5"></a-animation>
+        </a-sphere>
+
+        <a-sphere radius="0.5" position="-7 -4 0" pivot="0 4 0">
+          <a-animation attribute="rotation"
+            dur="5000"
+            fill="forwards"
+            from="90 0 0"
+            to="270 0 0"
+            direction="alternate"
+            repeat="indefinite"></a-animation>
         </a-sphere>
         
-        <Entity look-dist={{radius: 0.1, target: '#hello'}}/>
+        <Entity look-dist={{radius: 0.1, target: '#text'}}/>
 
         <Entity raycaster='objects: .clickable' cursor />
 
-        <Entity text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
+        <Entity id="text" text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
         <Human />
         
         <Entity primitive='a-plane' src='#ground_texture' rotation='-90 0 0' height='100' width='100'/>
