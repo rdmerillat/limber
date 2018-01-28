@@ -40,6 +40,15 @@ class VRScene extends React.Component {
           <a-asset-item id='human' src={head_model}/>
         </a-assets>
 
+        <a-entity id="blushing-cube" geometry="primitive: box">
+          <a-animation attribute="position"
+            from="-3 2 -5"
+            to="3 2 -5"
+            dur="10000"
+            direction="alternate"
+            repeat="indefinite"></a-animation> {/* To change # of repetitions, change numeric value of "repeat" or set "indefinite" */}
+        </a-entity>
+
         <Entity raycaster='objects: .clickable' cursor />
 
         <Entity text={{value: 'Hello, A-Frame React!', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
@@ -49,6 +58,8 @@ class VRScene extends React.Component {
         <Entity primitive='a-light' type='ambient' color='#445451'/>
         <Entity primitive='a-light' type='point' intensity='2' position='2 4 4'/>
         <Entity primitive='a-sky' height='2048' radius='30' src='#sky_texture' theta-length='90' width='2048'/>
+
+        
       </Scene>
     );
   }
