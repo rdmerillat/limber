@@ -4,11 +4,13 @@ import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+aframe_extras.registerAll()
+
 import floor_img from 'assets/floor.jpg';
 import sky_img from 'assets/sky.jpg';
 import head_model from 'assets/head.gltf';
 
-aframe_extras.registerAll()
+import 'look_dist';
 
 class Human extends React.Component {
   animations = ['sidetoside', 'shouldertoshoulder', 'upanddown'];
@@ -48,7 +50,9 @@ class VRScene extends React.Component {
             dur="10000"
             direction="alternate"
             repeat="indefinite"></a-animation> {/* To change # of repetitions, change numeric value of "repeat" or set "indefinite" */}
-        </a-sphere>
+        </a-entity>
+        
+        <Entity look-dist={{radius: 0.1, target: '#hello'}}/>
 
         <Entity raycaster='objects: .clickable' cursor />
 
