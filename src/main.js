@@ -79,6 +79,8 @@ class VRScene extends React.Component {
             direction="alternate"
             repeat="indefinite"></a-animation>
         </a-sphere>
+
+        {/* Angle specifies "if you are looking at it" */}
         
         <Entity look-dist={{radius: 15, target: '#text'}} events={{
           'lookAt': () => console.log('You looked at!'),
