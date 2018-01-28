@@ -114,7 +114,7 @@ class Score extends React.Component {
           value: 'Score : ' + this.state.score.toFixed(1),
           align: 'center' 
         }} 
-        position={{ x: 0, y: 1.7, z: -1 }} />
+        position={{ x: 0, y: 2.9, z: -3 }} />
     );
   }
 }
@@ -197,7 +197,7 @@ class VRScene extends React.Component {
 
         <Entity raycaster='objects: .clickable' cursor />
 
-        <Entity id="text" text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
+        <Entity id="text" text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 3, z: -3}}/>
         
         <Entity primitive='a-plane' src='#ground_texture' rotation='-90 0 0' height='100' width='100'/>
         <Entity primitive='a-light' type='ambient' color='#445451'/>
