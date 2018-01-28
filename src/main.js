@@ -25,7 +25,7 @@ class Human extends React.Component {
       <Entity 
         gltf-model='#human'
         animation-mixer={{
-          clip: this.animation
+          clip: this.animations[0]
         }}
       />
     );
