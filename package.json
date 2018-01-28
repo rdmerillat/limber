@@ -4,7 +4,8 @@
   "main": "src/index.js",
   "license": "GPL-3.0",
   "scripts": {
-    "start": "parcel src/index.html --open"
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html -d docs --public-url /minnehack2018-vr-something/"
   },
   "dependencies": {
     "aframe": "^0.7.1",
