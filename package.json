@@ -10,6 +10,7 @@
     "aframe": "^0.7.1",
     "aframe-extras": "^3.13.1",
     "aframe-react": "^4.3.0",
+    "dialogflow": "^0.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "three": "^0.89.0"
