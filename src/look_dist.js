@@ -28,9 +28,9 @@ AFRAME.registerComponent('look-dist', {
     var cond = r < rad;
     if (cond != this.lastCond) {
       if (cond) {
-        this.el.emit('lookAt', {}, false);
+        this.el.emit('lookAt', {}, true);
       } else {
-        this.el.emit('lookAway', {}, false);
+        this.el.emit('lookAway', {}, true);
       }
     }
     this.lastCond = cond;

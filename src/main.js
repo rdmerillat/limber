@@ -50,15 +50,16 @@ class Sphere extends React.Component {
 
   lookedAt = () => {
     this.setState({
-      color: this.correct_color,
+      color: this.correct_color
     })
+    this.props.delta(1);
   }
 
   lookedAway = () => {
-    $('#game').addPoints();
     this.setState({
       color: this.mistake_color
     })
+    this.props.delta(-1);
   }
 
   render() {
@@ -91,7 +92,7 @@ class Score extends React.Component {
   componentDidMount() {
     this.timerID = setInterval(
       () => this.increment(),
-      1000
+      100
     );
   }
 
@@ -101,18 +102,35 @@ class Score extends React.Component {
 
   increment() {
     this.setState({
-      score: this.state.score + 1
+      score: this.state.score + this.props['speed'] / 10
     });
   }
 
   render() {
     return (
-      <Entity id="score" text={{ value: 'Score : ' + this.state.score, align: 'center' }} position={{ x: 0, y: 1.7, z: -1 }} />
+      <Entity 
+        id="score" 
+        text={{ 
+          value: 'Score : ' + this.state.score.toFixed(1),
+          align: 'center' 
+        }} 
+        position={{ x: 0, y: 1.7, z: -1 }} />
     );
   }
 }
 
 class VRScene extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { speed: 0 }
+  }
+
+  append_speed = (delta) => {
+    this.setState({
+      speed: this.state.speed + delta
+    })
+  }
+
   render () {
     return (
       <Scene>
@@ -122,14 +140,16 @@ class VRScene extends React.Component {
           <a-asset-item id='human' src={head_model}/>
         </a-assets>
 
-        <Score />
+        <Score speed={this.state.speed}/>
 
         {/* Animate Side to side Sphere
             To Change Speed, chenge the value in "dur" (miliseconds)
             To change # of repetitions, change numeric value of "repeat" or set "indefinite" 
         */}
 
-        <Sphere radius="0.5"> {/* src='texture filepath  <- texture */}
+        <Sphere 
+          radius="0.5"
+          delta={this.append_speed}> {/* src='texture filepath  <- texture */}
           <a-animation attribute="position"
             from="-3 2 -5"
             to="3 2 -5"
@@ -144,7 +164,9 @@ class VRScene extends React.Component {
             To change # of repetitions, change numeric value of "repeat" or set "indefinite" 
         */}
 
-        <Sphere radius="0.25"> {/* src='texture filepath  <- texture */}
+        <Sphere 
+          radius="0.25"
+          delta={this.append_speed}> {/* src='texture filepath  <- texture */}
           <a-animation attribute="position"
             from="2.5 0.25 0"
             to="5 5 0"
@@ -154,7 +176,10 @@ class VRScene extends React.Component {
         </Sphere>
         <Human animation='upanddown' position='6 1 0' rotation="0 90 0"/>
 
-        <Sphere radius="0.5" position="-7 -4 0" pivot="0 4 0">
+        <Sphere 
+          radius="0.5"
+          position="-7 -4 0"pivot="0 4 0"
+          delta={this.append_speed}>
           <a-animation attribute="rotation"
             dur="5000"
             fill="forwards"
