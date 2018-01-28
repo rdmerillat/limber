@@ -11,7 +11,7 @@ import sky_img from 'assets/sky.jpg';
 import head_model from 'assets/head.gltf';
 
 import 'look_dist';
-import 'vrGame'
+// import 'vrGame';
 // import 'voice';
 
 class Human extends React.Component {
@@ -55,6 +55,7 @@ class Sphere extends React.Component {
   }
 
   lookedAway = () => {
+    $('#game').addPoints();
     this.setState({
       color: this.mistake_color
     })
@@ -81,6 +82,36 @@ class Sphere extends React.Component {
   }
 }
 
+class Score extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { score: 0 };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.increment(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  increment() {
+    this.setState({
+      score: this.state.score + 1
+    });
+  }
+
+  render() {
+    return (
+      <Entity id="score" text={{ value: 'Score : ' + this.state.score, align: 'center' }} position={{ x: 0, y: 1.7, z: -1 }} />
+    );
+  }
+}
+
 class VRScene extends React.Component {
   render () {
     return (
@@ -90,6 +121,8 @@ class VRScene extends React.Component {
           <img id='sky_texture' src={sky_img}/>
           <a-asset-item id='human' src={head_model}/>
         </a-assets>
+
+        <Score />
 
         {/* Animate Side to side Sphere
             To Change Speed, chenge the value in "dur" (miliseconds)
