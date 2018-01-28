@@ -14,8 +14,6 @@ import 'look_dist';
 import 'voice';
 
 class Human extends React.Component {
-  animations = ['sidetoside', 'shouldertoshoulder', 'upanddown'];
-
   constructor(props) {
     super(props);
     this.state = {
@@ -70,7 +68,7 @@ class Sphere extends React.Component {
         material={{color: this.state.color}}>
         {/* Angle specifies "if you are looking at it" */}
         <Entity
-          look-dist={{radius: 20}}
+          look-dist={{radius: 15}}
           events={{
             lookAt: this.lookedAt,
             lookAway: this.lookedAway,
@@ -103,8 +101,9 @@ class VRScene extends React.Component {
             to="3 2 -5"
             dur="10000"
             direction="alternate"
-            repeat="5"></a-animation> 
+            repeat="indefinite"></a-animation> 
         </Sphere>
+        <Human animation='sidetoside' position='0 1 -6' rotation="0 180 0"/>
 
         {/* Animate up and down Sphere
             To Change Speed, chenge the value in "dur" (miliseconds)
@@ -117,8 +116,9 @@ class VRScene extends React.Component {
             to="5 5 0"
             dur="10000"
             direction="alternate"
-            repeat="5"></a-animation>
+            repeat="indefinite"></a-animation>
         </Sphere>
+        <Human animation='upanddown' position='6 1 0' rotation="0 90 0"/>
 
         <Sphere radius="0.5" position="-7 -4 0" pivot="0 4 0">
           <a-animation attribute="rotation"
@@ -129,6 +129,7 @@ class VRScene extends React.Component {
             direction="alternate"
             repeat="indefinite"></a-animation>
         </Sphere>
+        <Human animation='shouldertoshoulder' position='-6 1 0' rotation="0 -90 0"/>
         
         <Entity look-dist={{radius: 15, target: '#text'}} events={{
           'lookAt': () => console.log('You looked at!'),
@@ -138,7 +139,6 @@ class VRScene extends React.Component {
         <Entity raycaster='objects: .clickable' cursor />
 
         <Entity id="text" text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
-        <Human animation='sidetoside' position='0 1 -5' rotation="0 180 0"/>
         
         <Entity primitive='a-plane' src='#ground_texture' rotation='-90 0 0' height='100' width='100'/>
         <Entity primitive='a-light' type='ambient' color='#445451'/>
