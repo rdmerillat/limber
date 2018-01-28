@@ -11,7 +11,8 @@ import sky_img from 'assets/sky.jpg';
 import head_model from 'assets/head.gltf';
 
 import 'look_dist';
-import 'voice';
+import 'vrGame'
+// import 'voice';
 
 class Human extends React.Component {
   constructor(props) {
