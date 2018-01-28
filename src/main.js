@@ -40,18 +40,19 @@ class VRScene extends React.Component {
           <a-asset-item id='human' src={head_model}/>
         </a-assets>
 
-        <a-entity id="blushing-cube" geometry="primitive: box">
+        {/* Animate Cube */}
+        <a-sphere id="ball" radius="0.5">
           <a-animation attribute="position"
             from="-3 2 -5"
             to="3 2 -5"
             dur="10000"
             direction="alternate"
             repeat="indefinite"></a-animation> {/* To change # of repetitions, change numeric value of "repeat" or set "indefinite" */}
-        </a-entity>
+        </a-sphere>
 
         <Entity raycaster='objects: .clickable' cursor />
 
-        <Entity text={{value: 'Hello, A-Frame React!', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
+        <Entity text={{value: 'Look forwards and track the ball through the air', align: 'center'}} position={{x: 0, y: 2, z: -1}}/>
         <Human />
         
         <Entity primitive='a-plane' src='#ground_texture' rotation='-90 0 0' height='100' width='100'/>
